@@ -71,6 +71,29 @@
 
   <build>
     <finalName>ticket-webapp</finalName>
+    <plugins>
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-enforcer-plugin</artifactId>
+    		<executions>
+    			<execution>
+    				<id>enforce-profile-target</id>
+    				<phase>validate</phase>
+    				<goals>
+    					<goal>enforce</goal>
+    				</goals>
+    				<configuration>
+    					<rules>
+    						<requireActiveProfile>
+    							<profiles>target-dev,target-test,target-prod</profiles>
+    							<all>false</all>
+    						</requireActiveProfile>
+    					</rules>
+    				</configuration>
+    			</execution>
+    		</executions>
+    	</plugin>
+    </plugins>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
@@ -105,4 +128,19 @@
       </plugins>
     </pluginManagement>
   </build>
+  
+  <profiles>
+  	<profile>
+  		<id>target-dev</id>
+  		
+  	</profile>
+  	<profile>
+  		<id>target-test</id>
+  		
+  	</profile>
+  	<profile>
+  		<id>target-prod</id>
+  		
+  	</profile>
+  </profiles>
 </project>
