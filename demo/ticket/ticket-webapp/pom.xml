@@ -20,6 +20,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+    
+    <application.name>TicketTac</application.name>
+    <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
   </properties>
 
   <dependencies>
@@ -93,6 +96,23 @@
     			</execution>
     		</executions>
     	</plugin>
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-war-plugin</artifactId>
+    		<configuration>
+    			<webResources>
+    				<resource>
+    					<directory>src/main/webapp</directory>
+    					<filtering>true</filtering>
+    					<includes>
+    						<include>jsp/_include/header.jsp</include>
+    						<include>jsp/_include/footer.jsp</include>
+    						<include>jsp/about.jsp</include>
+    					</includes>
+    				</resource>
+    			</webResources>
+    		</configuration>
+    	</plugin>
     </plugins>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
@@ -140,7 +160,31 @@
   	</profile>
   	<profile>
   		<id>target-prod</id>
-  		
+  		<build>
+  			<plugins>
+  				<plugin>
+  					<groupId>org.apache.maven.plugins</groupId>
+		    		<artifactId>maven-enforcer-plugin</artifactId>
+		    		<executions>
+		    			<execution>
+		    				<id>enforce-no-snapshot-prod</id>
+		    				<phase>validate</phase>
+		    				<goals>
+		    					<goal>enforce</goal>
+		    				</goals>
+		    				<configuration>
+		    					<rules>
+		    						<!-- Project and its parents must not be in SNAPSHOT -->
+		    						<requireReleaseVersion/>
+		    						<!-- Dependencies cannot be in SNAPSHOT -->
+		    						<requireReleaseDeps/>
+		    					</rules>
+		    				</configuration>
+		    			</execution>
+		    		</executions>
+  				</plugin>
+  			</plugins>
+  		</build>
   	</profile>
   </profiles>
 </project>
