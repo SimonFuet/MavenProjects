@@ -33,7 +33,7 @@
   <!-- Properties -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <apache.struts.version>2.5.10.1</apache.struts.version>
+    <apache.struts.version>2.5.20</apache.struts.version>
   </properties>
   
   <dependencies>
