@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>fr.fuet.ocfinalproject</groupId>
+  <artifactId>ticket</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>ticket</name>
+  <description>Practise application for Maven project management</description>
+  <url>http://maven.apache.org</url>
+  
+  <organization>
+    <name>Simon Fuet</name>
+    <url>http://maven.apache.org</url>
+  </organization>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <distributionManagement>
+    <site>
+        <id>site-projet</id>
+        <url>scp://localhost/temp/</url>
+    </site>
+  </distributionManagement>
+  
+  <modules>
+    <module>ticket-batch</module>
+    <module>ticket-webapp</module>
+    <module>ticket-business</module>
+    <module>ticket-consumer</module>
+    <module>ticket-model</module>
+  </modules>
+  
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency> 
+  			<groupId>fr.fuet.ocfinalproject</groupId>
+  			<artifactId>ticket-batch</artifactId>
+  			<version>1.0-SNAPSHOT</version>
+  		</dependency>
+        <dependency> 
+            <groupId>fr.fuet.ocfinalproject</groupId>
+            <artifactId>ticket-webapp</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency> 
+            <groupId>fr.fuet.ocfinalproject</groupId>
+            <artifactId>ticket-business</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency> 
+            <groupId>fr.fuet.ocfinalproject</groupId>
+            <artifactId>ticket-consumer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency> 
+            <groupId>fr.fuet.ocfinalproject</groupId>
+            <artifactId>ticket-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        
+	    <dependency>
+	      <groupId>javax.servlet</groupId>
+	      <artifactId>javax.servlet-api</artifactId>
+	      <version>4.0.1</version>
+	      <scope>provided</scope>
+	    </dependency>
+        <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.12</version>
+          <scope>test</scope>
+        </dependency>
+  	</dependencies>
+  </dependencyManagement>
+  
+  <build>
+    <directory>${project.basedir}/target</directory>
+    
+    <pluginManagement>
+        <plugins>
+	        <plugin>
+	          <artifactId>maven-clean-plugin</artifactId>
+	          <version>3.1.0</version>
+	        </plugin>
+	        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+	        <plugin>
+	          <artifactId>maven-resources-plugin</artifactId>
+	          <version>3.0.2</version>
+	        </plugin>
+	        <plugin>
+	          <artifactId>maven-compiler-plugin</artifactId>
+	          <version>3.8.0</version>
+	        </plugin>
+	        <plugin>
+	          <artifactId>maven-surefire-plugin</artifactId>
+	          <version>2.22.1</version>
+	        </plugin>
+	        <plugin>
+	          <artifactId>maven-war-plugin</artifactId>
+	          <version>3.2.2</version>
+	        </plugin>
+	        <plugin>
+	          <artifactId>maven-install-plugin</artifactId>
+	          <version>2.5.2</version>
+	        </plugin>
+	        <plugin>
+	          <artifactId>maven-deploy-plugin</artifactId>
+	          <version>2.8.2</version>
+	        </plugin>
+	        
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.6</version>
+                <configuration>
+                    <locales>fr</locales>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+    
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+        </plugin>
+    </plugins>
+  </build>
+  
+  <profiles>
+    <profile>
+        <id>with-sources</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+  </profiles>
+  
+  <reporting>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>2.7</version>
+            <reportSets>
+                <reportSet>
+                    <reports>
+                        <report>index</report>
+                        <report>summary</report>
+                        <report>plugins</report>
+                    </reports>
+                </reportSet>
+            </reportSets>
+        </plugin>
+        
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+            <version>2.20</version>
+            <configuration>
+                <linkXRef>false</linkXRef>
+            </configuration>
+            <reportSets>
+                <reportSet>
+                    <id>aggregate</id>
+                    <reports>
+                        <report>report</report>
+                    </reports>
+                    <inherited>false</inherited>
+                    <configuration>
+                        <aggregate>true</aggregate>
+                    </configuration>
+                </reportSet>
+                <reportSet>
+                    <id>modules</id>
+                    <inherited>true</inherited>
+                    <reports>
+                        <report>report</report>
+                    </reports>
+                    <configuration>
+                        <aggregate>false</aggregate>
+                    </configuration>
+                </reportSet>
+            </reportSets>
+        </plugin>
+    </plugins>
+  </reporting>
+
+</project>
